@@ -47,8 +47,8 @@ class ProductResults:
                                        "SKIPPED": 0,
                                        "TOTAL": 0,
                                        "PERCENTAGE PASSING": "0.0%",
-                                       "failed tests": [],
-                                       "errored tests": []}
+                                       "failed tests": set(),
+                                       "errored tests": set()}
 
     def record_results(self, case):
         self.results[case.name][case.result] += 1
@@ -60,10 +60,10 @@ class ProductResults:
 
 
     def record_failed_test_name(self, case):
-        self.results[case.name]["failed tests"].append(case.name)
+        self.results[case.name]["failed tests"].add(case.name)
 
     def record_errored_test_name(self, case):
-        self.results[case.name]["errored tests"].append(case.name)
+        self.results[case.name]["errored tests"].add(case.name)
 
     def update(self, case):
         self.results[case.name]["TOTAL"] = self.results[case.name]["FAILED"] + \
